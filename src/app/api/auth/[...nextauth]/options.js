@@ -19,26 +19,27 @@ export const authOptions= {
 
             try {
                 const user = await Users.findOne({
-                    $or [
+                    $or: [
                         {email: credentials.identifier.email},
                         {username: credentials.identifier.username},
                     ]
                 })
+                if(!user){
+                    throw new Error("No user found for the credentials entered.");
+                }
+                if(!user.isVerified){
+                    throw new Error("Please verify your account first.");
+                }
+                const isPasswordValid = await bcrypt.compare(credentials.password, user.password);
+                if(isPasswordValid){
+                    return user;
+                } else{
+                    throw new Error("Please recheck your password");
+                }
             } catch (error) {
                 throw new Error(error);
             }
-
-            const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
           
-            if (user) {
-                  // Any object returned will be saved in `user` property of the JWT
-                return user
-            } else {
-                  // If you return null then an error will be displayed advising the user to check their details.
-                return null
-          
-                  // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-                }
         },
     }
         )
