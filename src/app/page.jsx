@@ -1,10 +1,11 @@
+import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 
-export default function Home() {
+export default function App() {
   return (
     <div>
-      hello
+      hello world
+      goodbye world
     </div>
   );
 }
-//commit
