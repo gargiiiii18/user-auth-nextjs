@@ -19,7 +19,7 @@ export default function LoginPage(){
 
     return(
         <div>
-        <h1 className="m-2 p-2 text-4xl font-semibold text-center">{!isClicked ? "Login karega?" : "saabash" }</h1>
+        <h1 className="m-2 p-2 text-4xl font-semibold text-center">Login</h1>
         <div className="flex flex-col gap-5 items-center">
         
         <div>
