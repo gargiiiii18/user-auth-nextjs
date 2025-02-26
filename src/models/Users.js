@@ -6,6 +6,7 @@ const userSchema = new Schema({
     password: {type: String, required: [true, 'Please provide a password']},
     role: {type: String, enum: ["user", "admin"], default: "user"},
     isVerified: {type:Boolean, default: false},
+    isAcceptingMessages: {type: Boolean, default: true},
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
@@ -13,3 +14,4 @@ const userSchema = new Schema({
 });
 
 export default models.User || model("User", userSchema);
+

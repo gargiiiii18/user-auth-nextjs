@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Axios } from "axios";
 
@@ -10,12 +10,32 @@ export default function LoginPage(){
         email: "",
         password: "",
     });
-    const [isClicked, setIsClicked] = useState(false);
+     const [buttonDisabled, setButtonDisabled] = useState(true);
 
-    const handleLogin = async () => {
-        console.log(userCreds);
-        setIsClicked(true);
-    }
+    // const handleLogin = async () => {
+    //     // console.log(userCreds);
+    //     // setIsClicked(true);
+    //     try {
+    //         const response = await axios.post("/api/users/signup", userCreds);
+    //         console.log(response.data);
+    //         toast.success(response.data.message);
+    //         router.push("/login");
+    //       } catch (error) {
+    //        console.log(error);
+    //        if(error.status == 400){
+    //            toast.error("User already exists.")
+    //        } else{
+    //            toast.error("Internal server error.");  
+    //        }
+    //       }
+    // }
+
+    
+    useEffect(() => {
+        if(userCreds.email.length>0 && userCreds.password.length>0){
+            setButtonDisabled(false);
+        }
+    }, [userCreds]);
 
     return(
         <div>
@@ -48,7 +68,7 @@ export default function LoginPage(){
         <div className="flex flex-col gap-5 justify-center items-center">
             <button 
             type="submit"
-            className="bg-blue-600 px-4 py-1 rounded-lg text-white"
+            className={buttonDisabled ? "bg-gray-500 px-4 py-1 rounded-lg text-white cursor-not-allowed" : "bg-blue-600 px-4 py-1 rounded-lg text-white"}
             onSubmit={handleLogin}
             >Login</button>
             <Link href={"/signup"}>Signup</Link>
