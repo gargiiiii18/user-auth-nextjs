@@ -1,29 +1,39 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Axios } from "axios";
+import { log } from "util";
 
 export default function SignupPage(){
+
+    const router = useRouter();
 
     const [userCreds, setUserCreds] = useState({
         email: "",
         password: "",
         username: "",
     });
-    const [isClicked, setIsClicked] = useState(false);
+    const [buttonDisabled, setButtonDisabled] = useState(true);
 
     const handleSignup = async () => {
-        console.log(userCreds);
-        setIsClicked(true);
+       try {
+         
+       } catch (error) {
+        console.log(error);
+       }
     }
+
+    useEffect(() => {
+        if(userCreds.email.length>0 && userCreds.password.length>0 && userCreds.username.length>0){
+            setButtonDisabled(!buttonDisabled);
+        }
+    }, [userCreds]);
 
     return(
         <div>
-        <h1 className="m-2 p-2 text-4xl font-semibold text-center">{!isClicked ? "Signup na" : "Thank you cutie" }<div className="p-2 flex flex-col">
-            {!isClicked ? <div><div>🥹</div><div>👉👈</div></div> : <div><div>🤗</div></div>}
-            </div></h1>
-        <div className="flex flex-col gap-5 items-center">
+        <h1 className="m-2 p-2 text-4xl font-semibold text-center">Signup</h1>
+        <div className="flex w-auto flex-col gap-5 items-center">
         <div className="flex">
         <label className="text-lg text-left" htmlFor="username">Username</label>
         <input
@@ -62,8 +72,8 @@ export default function SignupPage(){
         <div className="flex flex-col gap-5 justify-center items-center">
             <button 
             type="submit"
-            className="bg-blue-600 px-4 py-1 rounded-lg text-white"
-            onSubmit={handleSignup}
+            className={buttonDisabled ? "bg-gray-500 px-4 py-1 rounded-lg text-white cursor-not-allowed" : "bg-blue-600 px-4 py-1 rounded-lg text-white"}
+            onClick={handleSignup}
             >Sign Up</button>
             <Link href={"/login"}>Login</Link>
         </div>
