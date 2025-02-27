@@ -1,6 +1,6 @@
 import {initMongoose} from "../../../../lib/mongoose";
 import User from "../../../../models/Users";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 initMongoose();
 
