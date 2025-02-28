@@ -5,8 +5,17 @@ export { default } from "next-auth/middleware";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
 
-  const token = await getToken();
+  console.log(request.cookies);
+  
+  const token = await getToken({req: request});
+  // console.log(token);
+  
   const url = request.nextUrl;
+
+  if(!token && url.pathname.startsWith("/dashboard")){
+    return NextResponse.redirect(new URL('/home', request.url));
+  }
+
   if(token && 
     (
       url.pathname.startsWith("/sign-in") ||
@@ -15,10 +24,11 @@ export async function middleware(request) {
       url.pathname.startsWith("/")
     )
   ){
-  return NextResponse.redirect(new URL('/dashboard', request.url))
+  return NextResponse.redirect(new URL('/dashboard', request.url));
   }
 
-  return NextResponse.redirect(new URL('/home', request.url))
+  return NextResponse.redirect(new URL('/home', request.url));
+  
 }
  
 // See "Matching Paths" below to learn more
