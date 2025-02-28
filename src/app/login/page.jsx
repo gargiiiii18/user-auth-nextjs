@@ -12,6 +12,10 @@ export default function LoginPage(){
     });
      const [buttonDisabled, setButtonDisabled] = useState(true);
 
+    const handleLogin = async() => {
+        
+    } 
+
     // const handleLogin = async () => {
     //     // console.log(userCreds);
     //     // setIsClicked(true);
