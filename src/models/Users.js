@@ -7,6 +7,8 @@ const userSchema = new Schema({
     role: {type: String, enum: ["user", "admin"], default: "user"},
     isVerified: {type:Boolean, default: false},
     isAcceptingMessages: {type: Boolean, default: true},
+    verifyCode: {type: String, required: [true, 'Please provide a verification code']},
+    verifyCodeExpiry: {type: Date, required: [true, 'Verification code expiry is required']},
     forgotPasswordToken: String,
     forgotPasswordTokenExpiry: Date,
     verifyToken: String,
