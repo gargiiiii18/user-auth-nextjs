@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
 // import {MongoClient} from "mongodb";
-import dotenv from "dotenv";
-
-dotenv.config();
 
 // const MongoClient = new MongoClient(process.env.MONGODB_URI);
 // const clientPromise = client.connect();
