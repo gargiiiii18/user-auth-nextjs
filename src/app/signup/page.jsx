@@ -24,7 +24,7 @@ export default function SignupPage(){
          const response = await axios.post("/api/users/signup", userCreds);
          console.log(response.data);
          toast.success(response.data.message);
-         router.push("/login");
+         router.push("/sign-in");
        } catch (error) {
         console.log(error);
         if(error.status == 400){
