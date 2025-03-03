@@ -15,5 +15,9 @@ const userSchema = new Schema({
     verifyTokenExpiry: Date,
 });
 
+// const MessageSchema = new Schema({
+//     con
+// })
+
 export default models.User || model("User", userSchema);
 
