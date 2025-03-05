@@ -50,14 +50,17 @@ export async function POST(request){
 
         const savedUser = await newUser.save();
         console.log(savedUser);
+    }
 
         const emailResponse = await sendVerificationEmail(email, username, verifyCode);
+        console.log("email sent");
+        
         if(!emailResponse.success){
             return NextResponse.json({error: emailResponse.message, success: false}, {status: 500});
         }
         
         return NextResponse.json({message: "User created successfully. Please verify your email", success: true}, {status: 201});
-       }
+       
 
     } catch (error) {
         console.log(error);
